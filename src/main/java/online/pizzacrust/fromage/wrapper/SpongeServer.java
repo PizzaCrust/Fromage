@@ -14,8 +14,6 @@ import online.pizzacrust.fromage.common.mc.Server;
 public class SpongeServer implements Server {
     @Override
     public void broadcast(String msg) {
-        Sponge.getGame().getServer().getOnlinePlayers().forEach((player) -> {
-            player.sendMessage(Text.of(msg));
-        });
+        Sponge.getGame().getServer().getOnlinePlayers().forEach((player) -> player.sendMessage(Text.of(msg)));
     }
 }
