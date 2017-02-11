@@ -1,4 +1,4 @@
-package online.pizzacrust.fromage.wrapper;
+package online.pizzacrust.fromage.wrapper.sponge;
 
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.text.Text;
