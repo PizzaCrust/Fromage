@@ -1,0 +1,13 @@
+plugins {
+    id 'org.spongepowered.plugin' version '0.8.1'
+}
+
+apply plugin: 'java'
+
+group = 'online.pizzacrust'
+version = '1.0-SNAPSHOT'
+description = 'The cheesiest scripting engine for Sponge'
+
+dependencies {
+    compile 'org.spongepowered:spongeapi:5.0.0'
+}
