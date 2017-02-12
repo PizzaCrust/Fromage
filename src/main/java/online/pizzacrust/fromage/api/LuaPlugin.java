@@ -77,6 +77,18 @@ public class LuaPlugin extends LuaObject {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public double getVersion() {
+        return version;
+    }
+
     public void enable() {
         if (enableFunc == null || !loaded || enabled) {
             throw new RuntimeException("Enable function is null! Set the enable function in " +
