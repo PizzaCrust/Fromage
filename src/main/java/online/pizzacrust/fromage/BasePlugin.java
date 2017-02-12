@@ -1,5 +1,7 @@
 package online.pizzacrust.fromage;
 
+import org.luaj.vm2.LuaValue;
+
 import java.io.File;
 import java.io.FilenameFilter;
 
@@ -45,8 +47,11 @@ public abstract class BasePlugin {
                 .valueOf(luaFiles != null ? luaFiles.length : new File[0].length));
         for (File luaFile : luaFiles != null ? luaFiles : new File[0]) {
             getAbstractLogger().info("Loading {} as a plugin file...", luaFile.getName());
-            LuaObject.GLOBAL_SCOPE.loadfile(luaFile.getAbsolutePath());
+            LuaValue chunk = LuaObject.GLOBAL_SCOPE.loadfile(luaFile.getAbsolutePath());
+            chunk.call();
         }
+        getAbstractLogger().info("Running initialising on plugins!");
+        Fromage.PLUGINS.forEach(LuaPlugin::load);
         getAbstractLogger().info("Running #enable for all plugins!");
         Fromage.PLUGINS.forEach(LuaPlugin::enable);
     }

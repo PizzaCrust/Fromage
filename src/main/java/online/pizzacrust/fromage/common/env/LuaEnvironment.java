@@ -58,7 +58,7 @@ public class LuaEnvironment {
     }
 
     private boolean extendsStaticLib(Class<?> clazz) {
-        return clazz.isAssignableFrom(LuaObject.Static.class);
+        return clazz.getSuperclass() == (LuaObject.Static.class);
     }
 
     private void processFromageLibs() {

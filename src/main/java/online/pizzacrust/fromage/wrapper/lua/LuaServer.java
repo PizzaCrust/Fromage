@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import online.pizzacrust.fromage.common.GlobalFunction;
 import online.pizzacrust.fromage.common.LuaObject;
+import online.pizzacrust.fromage.common.env.FromageLib;
 import online.pizzacrust.fromage.common.mc.Server;
 
 /**
@@ -14,20 +15,18 @@ import online.pizzacrust.fromage.common.mc.Server;
  * @since 1.0-SNAPSHOT
  * @author PizzaCrust
  */
-public class LuaServer extends LuaObject {
+@FromageLib
+public class LuaServer extends LuaObject.Static {
 
-    private final Server server;
-
-    public LuaServer(Server server) {
+    public LuaServer() {
         this.processClass();
-        this.server = server;
     }
 
     @GlobalFunction
     public void broadcast(Varargs varargs) {
         checkParameter(varargs, 1);
         String msg = varargs.tojstring();
-        server.broadcast(msg);
+        Server.INSTANCE[0].broadcast(msg);
     }
 
 }

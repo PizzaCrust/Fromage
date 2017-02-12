@@ -20,6 +20,8 @@ import online.pizzacrust.fromage.common.env.FromageLib;
 @FromageLib
 public class Fromage extends LuaObject.Static {
 
+    public Fromage() { this.processClass(); }
+
     public static final List<LuaPlugin> PLUGINS = new ArrayList<>();
 
     @GlobalFunction

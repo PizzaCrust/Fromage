@@ -11,7 +11,9 @@ import org.spongepowered.api.plugin.Plugin;
 import java.io.File;
 
 import online.pizzacrust.fromage.common.log.CommonLogger;
+import online.pizzacrust.fromage.common.mc.Server;
 import online.pizzacrust.fromage.wrapper.sponge.SLF4JLogger;
+import online.pizzacrust.fromage.wrapper.sponge.SpongeServer;
 
 @Plugin(id = "fromage")
 public class FromageSpongePlugin extends BasePlugin {
@@ -31,6 +33,7 @@ public class FromageSpongePlugin extends BasePlugin {
     @Listener
     public void onServerStart(GameStartingServerEvent e) {
         LOGGER.info("Initialising Fromage...");
+        Server.INSTANCE[0] = new SpongeServer();
         LOGGER.info("Using {} as a directory for loading Lua plugins.", getLuaPluginsDir().getPath());
         LOGGER.info("Passing to abstraction...");
         pluginEnabled();
