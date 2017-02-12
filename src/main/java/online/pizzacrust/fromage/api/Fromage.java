@@ -9,6 +9,7 @@ import java.util.List;
 
 import online.pizzacrust.fromage.common.GlobalFunction;
 import online.pizzacrust.fromage.common.LuaObject;
+import online.pizzacrust.fromage.common.env.FromageLib;
 
 /**
  * Represents the core API for Lua.
@@ -16,6 +17,7 @@ import online.pizzacrust.fromage.common.LuaObject;
  * @since 1.0-SNAPSHOT
  * @author PizzaCrust
  */
+@FromageLib
 public class Fromage extends LuaObject.Static {
 
     public static final List<LuaPlugin> PLUGINS = new ArrayList<>();

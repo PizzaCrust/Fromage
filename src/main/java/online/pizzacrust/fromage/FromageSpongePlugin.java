@@ -16,7 +16,7 @@ import online.pizzacrust.fromage.wrapper.sponge.SLF4JLogger;
 @Plugin(id = "fromage")
 public class FromageSpongePlugin extends BasePlugin {
 
-    private Logger logger = LoggerFactory.getLogger("Fromage");
+    public static final Logger LOGGER = LoggerFactory.getLogger("Fromage");
 
     @Override
     File getLuaPluginsDir() {
@@ -25,21 +25,21 @@ public class FromageSpongePlugin extends BasePlugin {
 
     @Override
     CommonLogger getAbstractLogger() {
-        return new SLF4JLogger(logger);
+        return new SLF4JLogger(LOGGER);
     }
 
     @Listener
     public void onServerStart(GameStartingServerEvent e) {
-        logger.info("Initialising Fromage...");
-        logger.info("Using {} as a directory for loading Lua plugins.", getLuaPluginsDir().getPath());
-        logger.info("Passing to abstraction...");
+        LOGGER.info("Initialising Fromage...");
+        LOGGER.info("Using {} as a directory for loading Lua plugins.", getLuaPluginsDir().getPath());
+        LOGGER.info("Passing to abstraction...");
         pluginEnabled();
     }
 
     @Listener
     public void onServerEnd(GameStoppingServerEvent e) {
-        logger.info("Ending Fromage...");
-        logger.info("Passing to abstraction...");
+        LOGGER.info("Ending Fromage...");
+        LOGGER.info("Passing to abstraction...");
         pluginDisabled();
     }
 
