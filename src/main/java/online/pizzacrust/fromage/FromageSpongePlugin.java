@@ -10,6 +10,9 @@ import org.spongepowered.api.plugin.Plugin;
 
 import java.io.File;
 
+import online.pizzacrust.fromage.common.log.CommonLogger;
+import online.pizzacrust.fromage.wrapper.sponge.SLF4JLogger;
+
 @Plugin(id = "fromage")
 public class FromageSpongePlugin extends BasePlugin {
 
@@ -20,16 +23,23 @@ public class FromageSpongePlugin extends BasePlugin {
         return Sponge.getGame().getConfigManager().getPluginConfig(this).getDirectory().toFile();
     }
 
+    @Override
+    CommonLogger getAbstractLogger() {
+        return new SLF4JLogger(logger);
+    }
+
     @Listener
     public void onServerStart(GameStartingServerEvent e) {
         logger.info("Initialising Fromage...");
         logger.info("Using {} as a directory for loading Lua plugins.", getLuaPluginsDir().getPath());
+        logger.info("Passing to abstraction...");
         pluginEnabled();
     }
 
     @Listener
     public void onServerEnd(GameStoppingServerEvent e) {
         logger.info("Ending Fromage...");
+        logger.info("Passing to abstraction...");
         pluginDisabled();
     }
 
