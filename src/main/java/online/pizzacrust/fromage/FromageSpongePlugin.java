@@ -1,8 +1,7 @@
 package online.pizzacrust.fromage;
 
-import com.google.inject.Inject;
-
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.spongepowered.api.Sponge;
 import org.spongepowered.api.event.Listener;
 import org.spongepowered.api.event.game.state.GameStartingServerEvent;
@@ -14,8 +13,7 @@ import java.io.File;
 @Plugin(id = "fromage")
 public class FromageSpongePlugin extends BasePlugin {
 
-    @Inject
-    private Logger logger;
+    private Logger logger = LoggerFactory.getLogger("Fromage");
 
     @Override
     File getLuaPluginsDir() {
