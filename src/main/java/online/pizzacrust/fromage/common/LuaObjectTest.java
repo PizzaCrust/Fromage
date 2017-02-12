@@ -26,6 +26,13 @@ public class LuaObjectTest extends LuaObject {
         System.out.println("meow");
     }
 
+    @LuaFunction
+    @GlobalFunction
+    public void conflictTest(Varargs varargs) {}
+
+    @GlobalFunction
+    public void globalFunc(Varargs varargs) { System.out.println("Globals work!"); }
+
     public static class TestProvider extends LuaObject.Static {
 
         public TestProvider() {
@@ -41,6 +48,7 @@ public class LuaObjectTest extends LuaObject {
 
     public static void main(String... args) throws Exception {
         Globals globals = new Globals();
+        LuaObject.GLOBAL_SCOPE = globals;
         globals.load(new JseBaseLib());
         globals.load(new PackageLib());
         globals.load(new Bit32Lib());
@@ -53,7 +61,8 @@ public class LuaObjectTest extends LuaObject {
         globals.load(new TestProvider());
         LoadState.install(globals);
         LuaC.install(globals);
-        LuaValue chunk = globals.load("TestProvider.getLuaObjectTest().objectTest()");
+        LuaValue chunk = globals.load("TestProvider.getLuaObjectTest().objectTest(); globalFunc" +
+                "()");
         chunk.call();
     }
 

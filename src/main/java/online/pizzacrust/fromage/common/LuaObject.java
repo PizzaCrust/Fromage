@@ -1,5 +1,6 @@
 package online.pizzacrust.fromage.common;
 
+import org.luaj.vm2.Globals;
 import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 import org.luaj.vm2.Varargs;
@@ -16,6 +17,22 @@ import java.util.function.Function;
  * @author PizzaCrust
  */
 public class LuaObject extends LuaTable {
+
+    /**
+     * For internal use. Throws a {@link RuntimeException}, if the specified parameter index
+     * is invalid. The index starts at 1.
+     * @param varargs
+     * @param index
+     */
+    protected void checkParameter(Varargs varargs, int index) {
+        if (varargs.isnil(index)) throw new RuntimeException();
+    }
+
+    /**
+     * Represents a global scope for Lua.
+     * Should be set at runtime.
+     */
+    public static Globals GLOBAL_SCOPE;
 
     private void addFunction(String name, Function<Varargs, LuaValue> func) {
         set(name, new VarArgFunction() {
@@ -38,6 +55,12 @@ public class LuaObject extends LuaTable {
     protected void processClass() {
         Object instance = this;
         for (Method method : this.getClass().getDeclaredMethods()) {
+            if (method.isAnnotationPresent(LuaFunction.class) && method.isAnnotationPresent
+                    (GlobalFunction.class)) {
+                System.out.println(String.format("%s#%s is a local function and a global " +
+                        "function! This is bad practice!", method.getDeclaringClass()
+                        .getSimpleName(), method.getName()));
+            }
             if (method.isAnnotationPresent(LuaFunction.class)) {
                 String name = method.getName();
                 addFunction(name, (varargs) -> {
@@ -50,6 +73,23 @@ public class LuaObject extends LuaTable {
                         e.printStackTrace();
                     }
                     return LuaValue.NIL;
+                });
+            } else if (method.isAnnotationPresent(GlobalFunction.class)) {
+                String name = method.getName();
+                GLOBAL_SCOPE.set(name, new VarArgFunction() {
+                    @Override
+                    public Varargs invoke(Varargs varargs) {
+                        try {
+                            Object invokeReturn = method.invoke(instance, varargs);
+                            if (invokeReturn != null) {
+                                return (LuaValue) invokeReturn;
+                            }
+                        }
+                        catch (IllegalAccessException | InvocationTargetException e) {
+                            e.printStackTrace();
+                        }
+                        return LuaValue.NIL;
+                    }
                 });
             }
         }
