@@ -28,6 +28,7 @@ public abstract class BasePlugin {
     protected void pluginEnabled() {
         LuaEnvironment luaEnvironment = new LuaEnvironment();
         luaEnvironment.initScope();
+        getLuaPluginsDir().mkdirs();
         File[] luaFiles = getLuaPluginsDir().listFiles((dir, name) -> name.endsWith(".lua"));
         for (File luaFile : luaFiles != null ? luaFiles : new File[0]) {
             LuaObject.GLOBAL_SCOPE.loadfile(luaFile.getAbsolutePath());
