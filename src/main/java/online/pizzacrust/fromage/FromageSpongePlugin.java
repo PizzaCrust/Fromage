@@ -46,7 +46,7 @@ public class FromageSpongePlugin extends BasePlugin {
         LOGGER.info("Initialising Fromage...");
         Server.INSTANCE[0] = new SpongeServer();
         Sponge.getGame().getCommandManager().register(this, commandLuaPlugins(), "luaplugin",
-                "lp", "lps");
+                "lp", "lps", "luaplugins");
         LOGGER.info("Using {} as a directory for loading Lua plugins.", getLuaPluginsDir().getPath());
         LOGGER.info("Passing to abstraction...");
         pluginEnabled();
