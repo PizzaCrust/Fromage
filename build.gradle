@@ -11,8 +11,23 @@ group = 'online.pizzacrust'
 version = '1.0-SNAPSHOT'
 description = 'The cheesiest scripting engine for Sponge'
 
+configurations {
+    shadeFinalJar
+}
+
 dependencies {
     compile 'org.spongepowered:spongeapi:5.0.0'
     compile group: 'org.luaj', name: 'luaj-jse', version: '3.0.1'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
+
+    shadeFinalJar group: 'org.luaj', name: 'luaj-jse', version: '3.0.1'
+    shadeFinalJar group: 'org.reflections', name: 'reflections', version: '0.9.10'
+}
+
+jar {
+    from {
+        configurations.shadeFinalJar.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
 }
