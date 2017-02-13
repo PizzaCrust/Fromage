@@ -25,7 +25,12 @@ dependencies {
     //shadeFinalJar group: 'org.reflections', name: 'reflections', version: '0.9.10'
 }
 
+ext.hasSign = getProperties().containsKey("signing.keyId")
+
+println("Has signed: ${ext.hasSign}")
+
 signing {
+    required { hasSign }
     sign configurations.archives
 }
 
