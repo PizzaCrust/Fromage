@@ -21,8 +21,8 @@ dependencies {
     compile group: 'org.luaj', name: 'luaj-jse', version: '3.0.1'
     compile group: 'org.reflections', name: 'reflections', version: '0.9.10'
 
-    shadeFinalJar group: 'org.luaj', name: 'luaj-jse', version: '3.0.1'
-    shadeFinalJar group: 'org.reflections', name: 'reflections', version: '0.9.10'
+    //shadeFinalJar group: 'org.luaj', name: 'luaj-jse', version: '3.0.1'
+    //shadeFinalJar group: 'org.reflections', name: 'reflections', version: '0.9.10'
 }
 
 signing {
