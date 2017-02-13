@@ -35,6 +35,8 @@ public abstract class BasePlugin {
      * Represents a common implementation of the start process of a plugin.
      */
     void pluginEnabled() {
+        getAbstractLogger().info("Current classloader: {}", Thread.currentThread()
+                .getContextClassLoader().getClass().getName());
         getAbstractLogger().info("Constructing the environment...");
         LuaEnvironment luaEnvironment = new LuaEnvironment();
         getAbstractLogger().info("Initialising the environment's scope...");
