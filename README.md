@@ -1,4 +1,4 @@
-# Fromage
+# Fromage ![Build Status](https://codeship.com/projects/bd95ea10-d424-0134-e4ef-426c815baba4/status?branch=master)
 Fromage allows developers to quickly create Sponge plugins quickly using the Lua scripting language.
 
 ### Features
