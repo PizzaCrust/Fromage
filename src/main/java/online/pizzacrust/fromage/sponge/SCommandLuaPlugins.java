@@ -49,7 +49,7 @@ public class SCommandLuaPlugins implements CommandExecutor {
             StringBuilder stringBuilder = new StringBuilder();
             final int[] index = {1};
             Fromage.PLUGINS.forEach((luaPlugin) -> {
-                if (index[0] == Fromage.PLUGINS.size() && Fromage.PLUGINS.size() != 0) {
+                if (index[0] == Fromage.PLUGINS.size() && Fromage.PLUGINS.size() != 1) {
                     stringBuilder.append("and ").append(luaPlugin.getName()).append(".");
                 } else {
                     stringBuilder.append(luaPlugin.getName()).append(", ");
