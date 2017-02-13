@@ -3,6 +3,7 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'signing'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -22,6 +23,10 @@ dependencies {
 
     shadeFinalJar group: 'org.luaj', name: 'luaj-jse', version: '3.0.1'
     shadeFinalJar group: 'org.reflections', name: 'reflections', version: '0.9.10'
+}
+
+signing {
+    sign configurations.archives
 }
 
 jar {
