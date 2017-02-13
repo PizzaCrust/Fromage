@@ -65,9 +65,20 @@ public class LuaObject extends LuaTable {
                 String name = method.getName();
                 addFunction(name, (varargs) -> {
                     try {
-                        Object returnVal = method.invoke(instance, varargs);
-                        if (returnVal != null) {
-                            return (LuaValue) returnVal;
+                        if (method.getParameterTypes().length >= 1) {
+                            if (method.getParameterTypes()[0] == Varargs.class) {
+                                Object returnVal = method.invoke(instance, varargs);
+                                if (returnVal != null) {
+                                    return (LuaValue) returnVal;
+                                }
+                            } else {
+                                throw new RuntimeException("Invalid method description!");
+                            }
+                        } else {
+                            Object returnVal = method.invoke(instance);
+                            if (returnVal != null) {
+                                return (LuaValue) returnVal;
+                            }
                         }
                     } catch (IllegalAccessException | InvocationTargetException e) {
                         e.printStackTrace();
@@ -80,9 +91,20 @@ public class LuaObject extends LuaTable {
                     @Override
                     public Varargs invoke(Varargs varargs) {
                         try {
-                            Object invokeReturn = method.invoke(instance, varargs);
-                            if (invokeReturn != null) {
-                                return (LuaValue) invokeReturn;
+                            if (method.getParameterTypes().length >= 1) {
+                                if (method.getParameterTypes()[0] == Varargs.class) {
+                                    Object returnVal = method.invoke(instance, varargs);
+                                    if (returnVal != null) {
+                                        return (LuaValue) returnVal;
+                                    }
+                                } else {
+                                    throw new RuntimeException("Invalid method description!");
+                                }
+                            } else {
+                                Object returnVal = method.invoke(instance);
+                                if (returnVal != null) {
+                                    return (LuaValue) returnVal;
+                                }
                             }
                         }
                         catch (IllegalAccessException | InvocationTargetException e) {
