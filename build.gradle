@@ -9,7 +9,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 group = 'online.pizzacrust'
-version = '1.0'
+version = '1.0.1'
 description = 'The cheesiest scripting engine for Sponge'
 
 configurations {
