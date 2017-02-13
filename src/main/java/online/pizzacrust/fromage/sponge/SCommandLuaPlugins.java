@@ -51,8 +51,10 @@ public class SCommandLuaPlugins implements CommandExecutor {
             Fromage.PLUGINS.forEach((luaPlugin) -> {
                 if (index[0] == Fromage.PLUGINS.size() && Fromage.PLUGINS.size() != 1) {
                     stringBuilder.append("and ").append(luaPlugin.getName()).append(".");
-                } else {
+                } else if (Fromage.PLUGINS.size() != 1) {
                     stringBuilder.append(luaPlugin.getName()).append(", ");
+                } else {
+                    stringBuilder.append(luaPlugin.getName());
                 }
                 index[0]++;
             });
