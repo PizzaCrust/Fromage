@@ -34,6 +34,22 @@ public class LuaObject extends LuaTable {
      */
     public static Globals GLOBAL_SCOPE;
 
+    /**
+     * Represents the current implementation.
+     *
+     * @since 1.0-SNAPSHOT
+     */
+    public enum Implementation {
+        SPONGE,
+        BUKKIT;
+    }
+
+    /**
+     * Represents the current implementation implementing Lua.
+     * Should be set at runtime.
+     */
+    public static Implementation CURRENT_IMPLEMENTATION;
+
     private void addFunction(String name, Function<Varargs, LuaValue> func) {
         set(name, new VarArgFunction() {
             @Override

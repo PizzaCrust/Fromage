@@ -13,6 +13,7 @@ import org.spongepowered.api.text.Text;
 
 import java.io.File;
 
+import online.pizzacrust.fromage.common.LuaObject;
 import online.pizzacrust.fromage.common.log.CommonLogger;
 import online.pizzacrust.fromage.common.mc.Server;
 import online.pizzacrust.fromage.sponge.SCommandLuaPlugins;
@@ -44,6 +45,7 @@ public class FromageSpongePlugin extends BasePlugin {
     @Listener
     public void onServerStart(GameStartingServerEvent e) {
         LOGGER.info("Initialising Fromage...");
+        LuaObject.CURRENT_IMPLEMENTATION = LuaObject.Implementation.SPONGE;
         Server.INSTANCE[0] = new SpongeServer();
         Sponge.getGame().getCommandManager().register(this, commandLuaPlugins(), "luaplugin",
                 "lp", "lps", "luaplugins");

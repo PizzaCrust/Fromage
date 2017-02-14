@@ -41,6 +41,11 @@ public class Fromage extends LuaObject.Static {
         PLUGINS.add(new LuaPlugin(name, desc, version, predicate));
     }
 
+    @GlobalFunction
+    public LuaValue getCurrentImplementationName() {
+        return valueOf(LuaObject.CURRENT_IMPLEMENTATION.name().toLowerCase());
+    }
+
     private boolean isDouble(Varargs varargs, int integer) {
         return isDouble(varargs.arg(integer));
     }
